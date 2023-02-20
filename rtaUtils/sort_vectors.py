@@ -40,8 +40,8 @@ window_size_slow = 101
 max_kchanges = 200
 max_iteraciones = 1000
 
-
-def load_raw_data(date: datetime.datetime) -> tuple[pd.DataFrame, pd.DataFrame]: # DEPRECATED
+# DEPRECATED
+def load_raw_data(date: datetime.datetime) -> tuple[pd.DataFrame, pd.DataFrame]: 
     month = date.strftime('%Y%m')
 
     file_path = list(raw_data_path_v.glob(f'month={month}/*.parquet'))[0]
@@ -83,16 +83,11 @@ def generate_windows(data_size:int, window_size:int, overlap:int, min_index:int=
     sobre una estructura de datos de longitud data_size.
     
     Args:
-        data_size: 
-            Longitud de la estructura de datos
-        window_size: 
-            Tamaño de la ventana deslizante
-        overlap: 
-            Número de elementos que se solapan entre ventanas consecutivas
-        min_index: 
-            Índice a partir del cual se calculan las ventanas
-        max_index: 
-            Índice hasta el que se generan las ventanas
+        data_size: Longitud de la estructura de datos
+        window_size: Tamaño de la ventana deslizante
+        overlap: Número de elementos que se solapan entre ventanas consecutivas
+        min_index: Índice a partir del cual se calculan las ventanas
+        max_index: Índice hasta el que se generan las ventanas
     
     Returns:
         Un conjunto de tripletas (num. ventana, índice inicial, índice final)

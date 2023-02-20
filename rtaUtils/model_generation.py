@@ -15,13 +15,21 @@ from paths import *
 
 
 def get_evaluation_metrics(inv_test_Y: np.array, inv_pred_Y: np.array, prnt: bool = False, name:str = ''):
-    """Calculates and optionally prints metrics given a set of real values and predictions
+    """Calculates and optionally displays metrics given a set of real values and predictions
+
+    Currently, six metrics are calculated:
+    - Mean absolute error
+    - Root mean squared error
+    - Mean absolute percentage error
+    - Standard deviation
+    - Mean
+    - Sample size
     
-        Args:
-            inv_test_Y:
-            inv_pred_Y:
-            prnt: Indicates whether the results should be printed on screen
-            name:
+    Args:
+        inv_test_Y: Array of real values
+        inv_pred_Y: Array of predicted values
+        prnt: Indicates whether the results should be printed on screen
+        name: Name of the dataset being evaluated
     """
     mae   = mean_absolute_error(inv_test_Y, inv_pred_Y)
     rmse  = math.sqrt(mean_squared_error(inv_test_Y, inv_pred_Y))
@@ -51,10 +59,11 @@ def get_evaluation_metrics(inv_test_Y: np.array, inv_pred_Y: np.array, prnt: boo
 
 
 def display_errors(test_Y: np.array, pred_Y: np.array, title: str = None):
+    """Generates an histogram of the errors"""
     fig,ax    = plt.subplots(1,1, figsize = (14,5))
     error     = pd.DataFrame(test_Y - pred_Y, columns=['error'])
 
-    pepe = sns.histplot(error, ax=ax, binwidth=50, log_scale=(False, True))
+    sns.histplot(error, ax=ax, binwidth=50, log_scale=(False, True))
     ax.set_title(title)
     ax.set(xlabel='Error (real-predicho)', 
            ylabel='Frecuencia')
