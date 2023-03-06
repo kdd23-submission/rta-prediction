@@ -274,7 +274,8 @@ class Experiment:
             name: Name of the dataset that is being evaluated
             title: Title of the figure for information purposes
         """
-        real_Y  = (self.get_y(dataset)/self.scaler.scale_[-1]).reshape((-1,))
+        # real_Y  = (self.get_y(dataset)/self.scaler.scale_[-1]).reshape((-1,))
+        real_Y  = (self.get_y(dataset)*self.scaler.data_range_[-1] + self.scaler.min_[-1]).reshape((-1,))
         if len(real_Y) < MIN_SAMPLE_SIZE:
             return {}
 
